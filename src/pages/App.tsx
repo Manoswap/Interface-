@@ -1,4 +1,4 @@
-import { initializeAnalytics, OriginApplication, sendAnalyticsEvent, Trace, user } from '@uniswap/analytics'
+import { sendAnalyticsEvent, Trace, user } from '@uniswap/analytics'
 import { CustomUserProperties, EventName, getBrowser, PageName } from '@uniswap/analytics-events'
 import Loader from 'components/Loader'
 import TopLevelModals from 'components/TopLevelModals'
@@ -11,12 +11,12 @@ import { ProfilePageLoadingSkeleton } from 'nft/components/profile/view/ProfileP
 import { useBag } from 'nft/hooks'
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { useIsDarkMode } from 'state/user/hooks'
+// import { useIsDarkMode } from 'state/user/hooks'
 import styled from 'styled-components/macro'
 import { SpinnerSVG } from 'theme/components'
 import { flexRowNoWrap } from 'theme/styles'
 import { Z_INDEX } from 'theme/zIndex'
-import { isProductionEnv } from 'utils/env'
+// import { isProductionEnv } from 'utils/env'
 import { getCLS, getFCP, getFID, getLCP, Metric } from 'web-vitals'
 
 import { useAnalyticsReporter } from '../components/analytics'
@@ -41,9 +41,9 @@ import RemoveLiquidity from './RemoveLiquidity'
 import RemoveLiquidityV3 from './RemoveLiquidity/V3'
 import Swap from './Swap'
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
-import Tokens from './Tokens'
+// import Tokens from './Tokens'
 
-const TokenDetails = lazy(() => import('./TokenDetails'))
+// const TokenDetails = lazy(() => import('./TokenDetails'))
 const Vote = lazy(() => import('./Vote'))
 const NftExplore = lazy(() => import('nft/pages/explore'))
 const Collection = lazy(() => import('nft/pages/collection'))
@@ -51,15 +51,15 @@ const Profile = lazy(() => import('nft/pages/profile/profile'))
 const Asset = lazy(() => import('nft/pages/asset/Asset'))
 
 // Placeholder API key. Actual API key used in the proxy server
-const ANALYTICS_DUMMY_KEY = '00000000000000000000000000000000'
-const ANALYTICS_PROXY_URL = process.env.REACT_APP_AMPLITUDE_PROXY_URL
-const COMMIT_HASH = process.env.REACT_APP_GIT_COMMIT_HASH
-initializeAnalytics(ANALYTICS_DUMMY_KEY, OriginApplication.INTERFACE, {
-  proxyUrl: ANALYTICS_PROXY_URL,
-  defaultEventName: EventName.PAGE_VIEWED,
-  commitHash: COMMIT_HASH,
-  isProductionEnv: isProductionEnv(),
-})
+// const ANALYTICS_DUMMY_KEY = '00000000000000000000000000000000'
+// const ANALYTICS_PROXY_URL = process.env.REACT_APP_AMPLITUDE_PROXY_URL
+// const COMMIT_HASH = process.env.REACT_APP_GIT_COMMIT_HASH
+// initializeAnalytics(ANALYTICS_DUMMY_KEY, OriginApplication.INTERFACE, {
+//   proxyUrl: ANALYTICS_PROXY_URL,
+//   defaultEventName: EventName.PAGE_VIEWED,
+//   commitHash: COMMIT_HASH,
+//   isProductionEnv: isProductionEnv(),
+// })
 
 const AppWrapper = styled.div`
   display: flex;
@@ -81,7 +81,6 @@ const BodyWrapper = styled.div`
 
 const HeaderWrapper = styled.div<{ transparent?: boolean }>`
   ${flexRowNoWrap};
-  background-color: ${({ theme, transparent }) => !transparent && theme.backgroundSurface};
   border-bottom: ${({ theme, transparent }) => !transparent && `1px solid ${theme.backgroundOutline}`};
   width: 100%;
   justify-content: space-between;
@@ -137,7 +136,7 @@ export default function App() {
 
   const { pathname } = useLocation()
   const currentPage = getCurrentPageFromLocation(pathname)
-  const isDarkMode = useIsDarkMode()
+  // const isDarkMode = useIsDarkMode()
   const isExpertMode = useIsExpertMode()
   const [scrolledState, setScrolledState] = useState(false)
 
@@ -161,8 +160,8 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    user.set(CustomUserProperties.DARK_MODE, isDarkMode)
-  }, [isDarkMode])
+    user.set(CustomUserProperties.DARK_MODE, true)
+  }, [])
 
   useEffect(() => {
     user.set(CustomUserProperties.EXPERT_MODE, isExpertMode)
@@ -196,10 +195,10 @@ export default function App() {
             <Suspense fallback={<Loader />}>
               {isLoaded ? (
                 <Routes>
-                  <Route path="tokens" element={<Tokens />}>
+                  {/* <Route path="tokens" element={<Tokens />}>
                     <Route path=":chainName" />
-                  </Route>
-                  <Route path="tokens/:chainName/:tokenAddress" element={<TokenDetails />} />
+                  </Route> */}
+                  {/* <Route path="tokens/:chainName/:tokenAddress" element={<TokenDetails />} /> */}
                   <Route
                     path="vote/*"
                     element={

@@ -177,28 +177,28 @@ export const lightTheme: Theme = {
 
   userThemeColor: colors.magentaVibrant,
 
-  background: '#faf9fa', //INTENTIONALLY OFF THEME TO GIVE WHITE BG A SOFTER VISUAL
+  background: '#292c6c', //INTENTIONALLY OFF THEME TO GIVE WHITE BG A SOFTER VISUAL
   backgroundBackdrop: colors.white,
-  backgroundSurface: colors.white,
-  backgroundModule: colors.gray50,
-  backgroundInteractive: colors.gray100,
+  backgroundSurface: '#16184e',
+  backgroundModule: '#292c6c',
+  backgroundInteractive: '#3f4183',
   backgroundFloating: opacify(8, colors.gray700),
-  backgroundOutline: colors.gray150,
+  backgroundOutline: colors.gray750,
   backgroundScrim: opacify(60, colors.gray900),
   backgroundScrolledSurface: opacify(72, colors.white),
 
-  textPrimary: colors.gray900,
+  textPrimary: colors.white,
   textSecondary: colors.gray400,
   textTertiary: colors.gray300,
 
-  accentAction: colors.pink400,
+  accentAction: '#F6643C',
   accentActive: colors.blue400,
   accentSuccess: colors.green300,
   accentWarning: colors.gold200,
   accentFailure: colors.red400,
   accentCritical: colors.red400,
 
-  accentActionSoft: opacify(24, colors.pink400),
+  accentActionSoft: opacify(24, '#F6643C'),
   accentActiveSoft: opacify(24, colors.blue400),
   accentSuccessSoft: opacify(24, colors.green400),
   accentWarningSoft: opacify(24, colors.gold200),
