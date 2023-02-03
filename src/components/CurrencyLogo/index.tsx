@@ -1,8 +1,10 @@
-import { Currency, ETHER, Token } from '@uniswap/sdk'
+import { ChainId, Currency, ETHER, Token } from '@manoswap/sdk'
+import { useWeb3React } from '@web3-react/core'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
+import CoreLogo from '../../assets/svg/core.svg'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
@@ -34,6 +36,7 @@ export default function CurrencyLogo({
   size?: string
   style?: React.CSSProperties
 }) {
+  const { chainId } = useWeb3React()
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
   const srcs: string[] = useMemo(() => {
@@ -48,6 +51,9 @@ export default function CurrencyLogo({
     }
     return []
   }, [currency, uriLocations])
+  if (currency === ETHER && chainId === ChainId.CORE) {
+    return <StyledEthereumLogo src={CoreLogo} size={size} style={style} />
+  }
 
   if (currency === ETHER) {
     return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
