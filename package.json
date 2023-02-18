@@ -120,5 +120,10 @@
   "dependencies": {
     "@manoswap/sdk": "^3.0.4",
     "@uniswap/default-token-list": "^2.0.0"
+  },
+  "engines": {
+    "npm": "please-use-yarn",
+    "node": "14",
+    "yarn": ">=1.22"
   }
 }
