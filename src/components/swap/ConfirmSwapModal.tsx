@@ -78,8 +78,10 @@ export default function ConfirmSwapModal({
 
   // text to show while loading
   const pendingText = `Swapping ${trade?.inputAmount?.toSignificant(6)} ${
-    trade?.inputAmount?.currency?.symbol
-  } for ${trade?.outputAmount?.toSignificant(6)} ${trade?.outputAmount?.currency?.symbol}`
+    trade?.inputAmount?.currency?.symbol === 'ETH' ? 'CORE' : trade?.inputAmount?.currency?.symbol
+  } for ${trade?.outputAmount?.toSignificant(6)} ${
+    trade?.outputAmount?.currency?.symbol === 'ETH' ? 'CORE' : trade?.outputAmount?.currency?.symbol
+  }`
 
   const confirmationContent = useCallback(
     () =>

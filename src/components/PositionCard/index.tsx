@@ -299,14 +299,16 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               </Text>
             </FixedHeightRow>
 
-            <ButtonSecondary padding="8px" borderRadius="8px">
-              <ExternalLink
-                style={{ width: '100%', textAlign: 'center' }}
-                href={`https://uniswap.info/account/${account}`}
-              >
-                View accrued fees and analytics<span style={{ fontSize: '11px' }}>↗</span>
-              </ExternalLink>
-            </ButtonSecondary>
+            {false && (
+              <ButtonSecondary padding="8px" borderRadius="8px">
+                <ExternalLink
+                  style={{ width: '100%', textAlign: 'center' }}
+                  href={`https://uniswap.info/account/${account}`}
+                >
+                  View accrued fees and analytics<span style={{ fontSize: '11px' }}>↗</span>
+                </ExternalLink>
+              </ButtonSecondary>
+            )}
             {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.raw, BIG_INT_ZERO) && (
               <RowBetween marginTop="10px">
                 <ButtonPrimary

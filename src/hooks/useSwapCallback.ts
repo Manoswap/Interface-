@@ -208,7 +208,9 @@ export function useSwapCallback(
             const inputAmount = trade.inputAmount.toSignificant(3)
             const outputAmount = trade.outputAmount.toSignificant(3)
 
-            const base = `Swap ${inputAmount} ${inputSymbol} for ${outputAmount} ${outputSymbol}`
+            const base = `Swap ${inputAmount} ${inputSymbol === 'ETH' ? 'CORE' : inputSymbol} for ${outputAmount} ${
+              outputSymbol === 'ETH' ? 'CORE' : outputSymbol
+            }`
             const withRecipient =
               recipient === account
                 ? base

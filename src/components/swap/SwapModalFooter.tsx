@@ -81,7 +81,11 @@ export default function SwapModalFooter({
             </TYPE.black>
             <TYPE.black fontSize={14} marginLeft={'4px'}>
               {trade.tradeType === TradeType.EXACT_INPUT
-                ? trade.outputAmount.currency.symbol
+                ? trade.outputAmount.currency.symbol === 'ETH'
+                  ? 'CORE'
+                  : trade.outputAmount.currency.symbol
+                : trade.inputAmount.currency.symbol === 'ETH'
+                ? 'CORE'
                 : trade.inputAmount.currency.symbol}
             </TYPE.black>
           </RowFixed>
@@ -89,9 +93,9 @@ export default function SwapModalFooter({
         <RowBetween>
           <RowFixed>
             <TYPE.black color={theme.text2} fontSize={14} fontWeight={400}>
+              <QuestionHelper text="The difference between the market price and your price due to trade size." />
               Price Impact
             </TYPE.black>
-            <QuestionHelper text="The difference between the market price and your price due to trade size." />
           </RowFixed>
           <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
         </RowBetween>
@@ -103,7 +107,11 @@ export default function SwapModalFooter({
             <QuestionHelper text="A portion of each trade (0.30%) goes to liquidity providers as a protocol incentive." />
           </RowFixed>
           <TYPE.black fontSize={14}>
-            {realizedLPFee ? realizedLPFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol : '-'}
+            {realizedLPFee
+              ? realizedLPFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol === 'ETH'
+                ? 'CORE'
+                : trade.inputAmount.currency.symbol
+              : '-'}
           </TYPE.black>
         </RowBetween>
       </AutoColumn>
