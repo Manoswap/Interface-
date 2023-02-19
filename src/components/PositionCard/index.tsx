@@ -96,7 +96,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
                 <DoubleCurrencyLogo currency0={currency0} currency1={currency1} margin={true} size={20} />
                 <Text fontWeight={500} fontSize={20}>
                   {currency0.symbol === 'ETH' ? 'CORE' : currency0.symbol}/
-                  {currency1.symbol === 'ETH' ? 'CORE' : currency0.symbol}
+                  {currency1.symbol === 'ETH' ? 'CORE' : currency1.symbol}
                 </Text>
               </RowFixed>
               <RowFixed>
@@ -116,7 +116,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               </FixedHeightRow>
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  {currency0.symbol}:
+                  {currency0.symbol === 'ETH' ? 'CORE' : currency0.symbol}:
                 </Text>
                 {token0Deposited ? (
                   <RowFixed>
@@ -130,7 +130,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               </FixedHeightRow>
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  {currency1.symbol}:
+                  {currency1.symbol === 'ETH' ? 'CORE' : currency1.symbol}:
                 </Text>
                 {token1Deposited ? (
                   <RowFixed>

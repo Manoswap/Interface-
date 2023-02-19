@@ -184,13 +184,19 @@ export default function AddLiquidity({
           addTransaction(response, {
             summary:
               'Add ' +
-              parsedAmounts[Field.CURRENCY_A]?.toSignificant(3) +
-              ' ' +
-              currencies[Field.CURRENCY_A]?.symbol +
-              ' and ' +
-              parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) +
-              ' ' +
-              currencies[Field.CURRENCY_B]?.symbol
+                parsedAmounts[Field.CURRENCY_A]?.toSignificant(3) +
+                ' ' +
+                currencies[Field.CURRENCY_A]?.symbol ===
+              'ETH'
+                ? 'CORE'
+                : currencies[Field.CURRENCY_A]?.symbol +
+                    ' and ' +
+                    parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) +
+                    ' ' +
+                    currencies[Field.CURRENCY_B]?.symbol ===
+                  'ETH'
+                ? 'CORE'
+                : currencies[Field.CURRENCY_B]?.symbol
           })
 
           setTxHash(response.hash)
@@ -198,7 +204,10 @@ export default function AddLiquidity({
           ReactGA.event({
             category: 'Liquidity',
             action: 'Add',
-            label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/')
+            label: [
+              currencies[Field.CURRENCY_A]?.symbol === 'ETH' ? 'CORE' : currencies[Field.CURRENCY_A]?.symbol,
+              currencies[Field.CURRENCY_B]?.symbol === 'ETH' ? 'CORE' : currencies[Field.CURRENCY_B]?.symbol
+            ].join('/')
           })
         })
       )
@@ -217,7 +226,11 @@ export default function AddLiquidity({
         <LightCard mt="20px" borderRadius="20px">
           <RowFlat>
             <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
-              {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol}
+              {currencies[Field.CURRENCY_A]?.symbol === 'ETH'
+                ? 'CORE'
+                : currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol === 'ETH'
+                ? 'CORE'
+                : currencies[Field.CURRENCY_B]?.symbol}
             </Text>
             <DoubleCurrencyLogo
               currency0={currencies[Field.CURRENCY_A]}
@@ -241,7 +254,11 @@ export default function AddLiquidity({
         </RowFlat>
         <Row>
           <Text fontSize="24px">
-            {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol + ' Pool Tokens'}
+            {currencies[Field.CURRENCY_A]?.symbol === 'ETH'
+              ? 'CORE'
+              : currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol === 'ETH'
+              ? 'CORE'
+              : currencies[Field.CURRENCY_B]?.symbol + ' Pool Tokens'}
           </Text>
         </Row>
         <TYPE.italic fontSize={12} textAlign="left" padding={'8px 0 0 0 '}>
@@ -266,8 +283,10 @@ export default function AddLiquidity({
   }
 
   const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-    currencies[Field.CURRENCY_A]?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
+    currencies[Field.CURRENCY_A]?.symbol === 'ETH' ? 'CORE' : currencies[Field.CURRENCY_A]?.symbol
+  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${
+    currencies[Field.CURRENCY_B]?.symbol === 'ETH' ? 'CORE' : currencies[Field.CURRENCY_B]?.symbol
+  }`
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
