@@ -225,7 +225,7 @@ export default function AccountDetails({
   ENSName,
   openOptions
 }: AccountDetailsProps) {
-  const { chainId, account, connector } = useActiveWeb3React()
+  const { chainId, account, connector, deactivate } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
 
@@ -307,6 +307,29 @@ export default function AccountDetails({
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {
                         ;(connector as any).close()
+                        toggleWalletModal()
+                      }}
+                    >
+                      Disconnect
+                    </WalletAction>
+                  )}
+                  {connector === injected && (
+                    <WalletAction
+                      style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
+                      onClick={() => {
+                        deactivate()
+                        toggleWalletModal()
+                      }}
+                    >
+                      Disconnect
+                    </WalletAction>
+                  )}
+                  {connector === walletlink && (
+                    <WalletAction
+                      style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
+                      onClick={() => {
+                        deactivate()
+                        toggleWalletModal()
                       }}
                     >
                       Disconnect
